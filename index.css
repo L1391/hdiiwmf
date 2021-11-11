@@ -1,0 +1,56 @@
+body {
+    background-image: url("aesthetic-gif-12.gif");
+    background-size: cover;
+}
+
+@keyframes flicker {
+    0% {color: white;}
+    50% {color: cornflowerblue;}
+    100% {color: coral;}
+}
+
+h1 {
+    text-align: center;
+    animation: flicker 1s linear 0s infinite alternate;
+}
+
+#timeline {
+    position: relative;
+    display: block;
+    width: 300px;
+    padding: 10px;
+    margin: 10px auto;
+}
+
+#canvas-holder {
+    background-color: white;
+    width: 80%;
+    margin: auto;
+    border: solid black 2px;
+}
+
+canvas {
+    display: block;
+    margin: auto;
+}
+
+#interaction-list p {
+    display: inline;
+}
+
+#controls {
+    background-color: white;
+    position: relative;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    border: solid black 2px;
+}
+
+#controls .col{
+    padding: 10px;
+    margin: 10px;
+    border: solid black 2px;
+}
