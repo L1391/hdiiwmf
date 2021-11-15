@@ -14,6 +14,8 @@ function updateTree() {
     var weekNum = document.getElementById("timeline").value;
     var interactionSum = getWeeklyTotal(weekNum);
 
+    strokeWeight(1);
+    stroke(0);
     text("Week: " + weekNum, 10, 20);
     text("Total interactions: " + interactionSum, 10, 40);
 

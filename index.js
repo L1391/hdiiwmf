@@ -2,15 +2,19 @@ let data;
 let thisWeek = {};
 
 window.onload = () => {
+    getStorage();
+
     document.getElementById("add-week").addEventListener("click", (e) => {
+        console.log(data["interactions"]);
+
         var newWeek ={};
         for (var key in thisWeek) {
             newWeek[key] = document.getElementById(key).value;
         }
 
-        console.log(data);
+        console.log(newWeek);
         data["interactions"].push(newWeek);
-        console.log(data);
+        console.log(data["interactions"]);
 
         localStorage.setItem('friend-data', JSON.stringify(data));
         console.log(localStorage.getItem('friend-data'));
@@ -36,10 +40,8 @@ window.onload = () => {
 
     document.getElementById("clear-nums").addEventListener("click", (e) => {
         for (var key in thisWeek) {
-            thisWeek[key] = 0;
+            document.getElementById(key).value = "0";
         }
-
-        reloadRightControls();
     });
 
     document.getElementById("add-friend").addEventListener("click", (e) => {
@@ -54,8 +56,6 @@ window.onload = () => {
     document.getElementById("timeline").addEventListener("change", (e) => {
         updateTree();
     });
-
-   getStorage();
     
     reloadTimeline();
 
@@ -90,6 +90,7 @@ function reloadTimeline() {
     var timeline = document.getElementById("timeline");
     timeline.min = 0;
     timeline.max = data["interactions"].length - 1;
+    timeline.value = data["interactions"].length - 1;
 
 }
 
