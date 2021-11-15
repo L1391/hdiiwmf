@@ -2,10 +2,10 @@ let data;
 let thisWeek = {};
 
 window.onload = () => {
+    //load data
     getStorage();
 
     document.getElementById("add-week").addEventListener("click", (e) => {
-        console.log(data["interactions"]);
 
         var newWeek ={};
         for (var key in thisWeek) {
@@ -13,12 +13,13 @@ window.onload = () => {
         }
 
         console.log(newWeek);
+        //add new row in array
         data["interactions"].push(newWeek);
-        console.log(data["interactions"]);
 
         localStorage.setItem('friend-data', JSON.stringify(data));
         console.log(localStorage.getItem('friend-data'));
 
+        //reload visuals
         getStorage();
         reloadTimeline();
         updateTree();
@@ -29,24 +30,30 @@ window.onload = () => {
             thisWeek[key] = document.getElementById(key).value;
         }
 
+        //replace last row with inputs
         data["interactions"][data["interactions"].length -1] = thisWeek;
 
         localStorage.setItem('friend-data', JSON.stringify(data));
         console.log(localStorage.getItem('friend-data'));
 
+        //reload visuals
         getStorage();
         updateTree();
     });
 
     document.getElementById("clear-nums").addEventListener("click", (e) => {
+        //reset input values
         for (var key in thisWeek) {
             document.getElementById(key).value = "0";
         }
     });
 
     document.getElementById("add-friend").addEventListener("click", (e) => {
+        //add new key
         var friendName = document.getElementById("add-friend-name").value;
-        thisWeek[friendName] = 0;
+        thisWeek[friendName] = "0";
+
+        //reload visuals
         reloadLeftControls();
         reloadRightControls();
         updateTree();
@@ -54,6 +61,7 @@ window.onload = () => {
     });
 
     document.getElementById("timeline").addEventListener("change", (e) => {
+        //update visuals
         updateTree();
     });
     

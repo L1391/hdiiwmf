@@ -1,3 +1,4 @@
+//maximum radius of spoke
 const rad = 125;
 
 function setup() {
@@ -5,15 +6,13 @@ function setup() {
     canvas.parent("canvas-holder");
 } 
 
-function draw() {
-}
-
 function updateTree() {
     background(255);
 
     var weekNum = document.getElementById("timeline").value;
     var interactionSum = getWeeklyTotal(weekNum);
 
+    //descriptive text
     strokeWeight(1);
     stroke(0);
     text("Week: " + weekNum, 10, 20);
@@ -23,12 +22,15 @@ function updateTree() {
     for (var key in thisWeek) {
         stroke(random(255), random(255), random(255));
 
+        //evenly space names around circle
         var x = rad*cos(i*TWO_PI/Object.keys(thisWeek).length);
         var y = rad*sin(i*TWO_PI/Object.keys(thisWeek).length);
 
         strokeWeight(1);
         circle(width/2 + x, height/2 + y, 10);
         text(key, width/2 + x + 10, height/2 + y + 5)
+
+        //make length proportional to specific interactions over total interactions
         let v = createVector(x, y);
         if (typeof data["interactions"][weekNum][key] === 'undefined') {
             v.mult(0);
