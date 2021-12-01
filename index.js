@@ -55,7 +55,7 @@ window.onload = () => {
 
         //reload visuals
         reloadLeftControls();
-        reloadRightControls();
+        addRightControls(friendName);
         updateTree();
 
     });
@@ -133,4 +133,21 @@ function reloadRightControls() {
         interactionList.append(friendItem);
     }
 
+}
+
+function addRightControls(key) {
+    var interactionList = document.getElementById("interaction-list");
+
+    var friendItem = document.createElement("div");
+    var friendItemName = document.createElement("p");
+    friendItemName.innerText = key;
+    var friendItemInteractions = document.createElement("input");
+    friendItemInteractions.setAttribute("type", "number");
+    friendItemInteractions.id = key;
+    friendItemInteractions.min = 0;
+    friendItemInteractions.value = thisWeek[key];
+
+    friendItem.append(friendItemName, friendItemInteractions);
+        
+    interactionList.append(friendItem);
 }
