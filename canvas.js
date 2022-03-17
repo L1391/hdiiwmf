@@ -1,10 +1,38 @@
 //maximum radius of spoke
 const rad = 125;
 
+// radius of name circles
+const circleSize = 10;
+
+// positions for each name
+var namePos = {};
+
 function setup() {
+    frameRate(4);
     var canvas = createCanvas(400,400);
     canvas.parent("canvas-holder");
 } 
+
+// display notes when a name circle is clicked
+function mouseClicked() {
+    for(var key in thisWeek) {
+        var circleX = namePos[key]["x"];
+        var circleY = namePos[key]["y"];
+
+        
+        if (dist(mouseX,mouseY,circleX,circleY) <= circleSize/2 ) {
+                console.log("DISPLAY" + key);
+                stroke(255);
+                rect(0,height-20,width,20);
+                stroke(0);
+                strokeWeight(1);
+                text(thisWeek[key]["notes"], 0, height - 10);
+
+            return;
+        }
+    }
+
+}
 
 function updateTree() {
     background(255);
@@ -27,15 +55,18 @@ function updateTree() {
         var y = rad*sin(i*TWO_PI/Object.keys(thisWeek).length);
 
         strokeWeight(1);
-        circle(width/2 + x, height/2 + y, 10);
+        circle(width/2 + x, height/2 + y, circleSize);
         text(key, width/2 + x + 10, height/2 + y + 5)
+
+        // add position to name positions
+        namePos[key] = {"x": width/2 + x, "y": height/2+y};
 
         //make length proportional to specific interactions over total interactions
         let v = createVector(x, y);
-        if (typeof data["interactions"][weekNum][key] === 'undefined') {
+        if (typeof data["interactions"][weekNum][key] === 'undefined' || typeof data["interactions"][weekNum][key]["int"] === 'undefined') {
             v.mult(0);
         } else {
-            v.mult(data["interactions"][weekNum][key]/interactionSum);
+            v.mult(data["interactions"][weekNum][key]["int"]/interactionSum);
         }
 
         strokeWeight(5);
@@ -43,6 +74,4 @@ function updateTree() {
 
         i++;
     }
-
-
 }
