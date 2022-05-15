@@ -1,8 +1,6 @@
 let data;
 let thisWeek = {};
 
-/**{"interactions":[{"Emily":"1","Long":"3","Emma":"4","Elsa":"6","Monica":"1","Gio":"2","Allison":"1","Emmy":"1"},{"Emily":"0","Long":"1","Emma":"3","Elsa":"5","Monica":"0","Gio":"3","Allison":"0","Emmy":"2","SSJI People":"1","Juna":"4","Cici":"1","Frisbee People":"2"},{"Emily":"0","Long":"0","Emma":"1","Elsa":"3","Monica":"0","Gio":"2","Allison":"0","Emmy":"1","SSJI People":"0","Juna":"0","Cici":"0","Frisbee People":"0","Selma":"1"},{"Emily":"0","Long":"0","Emma":"3","Elsa":"1","Monica":"0","Gio":"1","Allison":"3","Emmy":"0","SSJI People":"0","Juna":"1","Cici":"0","Frisbee People":"0","Selma":"1","Hillary":"1","JiHo":"3","Noor":"0"},{"Emily":"0","Long":"0","Emma":"2","Elsa":"2","Monica":"1","Gio":"0","Allison":"1","Emmy":"1","SSJI People":"0","Juna":"1","Cici":"1","Frisbee People":"4","Selma":"0","Hillary":"0","JiHo":"1","Noor":"1"},{"Emily":"0","Long":"0","Emma":"0","Elsa":"1","Monica":"0","Gio":"0","Allison":"0","Emmy":"0","SSJI People":"0","Juna":"1","Cici":"0","Frisbee People":"1","Selma":"0","Hillary":"0","JiHo":"0","Noor":"0"}]} */
-
 window.onload = () => {
     //load data
     getStorage();
@@ -61,7 +59,6 @@ window.onload = () => {
     document.getElementById("add-friend").addEventListener("click", (e) => {
         //add new key
         var friendName = document.getElementById("add-friend-name").value;
-        document.getElementById(key+"int").value = "0";
         friendData = {};
         friendData["int"] = "0";
         friendData["notes"] = "";
@@ -70,6 +67,7 @@ window.onload = () => {
         //reload visuals
         reloadLeftControls();
         addRightControls(friendName);
+
         updateTree();
 
     });
@@ -89,15 +87,20 @@ window.onload = () => {
 }
 
 function getStorage() {
+    console.log(localStorage.getItem('friend-data'));
     data = JSON.parse(localStorage.getItem('friend-data'));
         
     //localStorage.clear();
+
+
 
     console.log(data);
 
     if(data === null) {
         data = {'interactions': [{}]};
     } 
+
+    console.log(data);
 
     thisWeek = data["interactions"][data["interactions"].length -1];
 }

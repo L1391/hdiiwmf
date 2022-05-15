@@ -15,6 +15,10 @@ function setup() {
 
 // display notes when a name circle is clicked
 function mouseClicked() {
+    if (mouseX < 0 || mouseX > width || mouseY < 0 || mouseY > height) {
+        return;
+    } 
+
     for(var key in thisWeek) {
         var circleX = namePos[key]["x"];
         var circleY = namePos[key]["y"];
